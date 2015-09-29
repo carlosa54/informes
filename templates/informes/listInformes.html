@@ -1,0 +1,33 @@
+<div class="container" id="Container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div class="text-center">
+                <i class="fa fa-search-plus pull-left icon"></i>
+                <h2>Invoice History</h2>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table table-bordered">
+            <tr>
+                <th>Informe #</th>
+                <th>Nombre</th>
+                <th>Departamentos</th>
+                
+            </tr>
+
+            {% for informe in informes %}
+                <tr>
+                    <td>{{informe.id}}</td>
+                    <td>{{informe.name}}</td>
+                    <td>{{informe.departamentos}}</td>
+                    <td><a class="btn btn-primary btn-block" href="/informes/{{informe.id}}">Detalle</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </div>
+</div>

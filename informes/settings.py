@@ -37,6 +37,15 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third party
+    'django_extensions',
+
+    'informes.informesmen',
+    'informes.departamentos',
+    'informes.questions',
+    'informes.persons',
+    'informes.users'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,7 +64,7 @@ ROOT_URLCONF = 'informes.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +77,9 @@ TEMPLATES = [
     },
 ]
 
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+
 WSGI_APPLICATION = 'informes.wsgi.application'
 
 
@@ -76,8 +88,13 @@ WSGI_APPLICATION = 'informes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'daco',                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': 'Carlos',
+        'PASSWORD': '',
+        'HOST': 'localhost',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
+        'PORT': '',
     }
 }
 
@@ -100,3 +117,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
+
+MEDIA_ROOT = 'media'
+MEDIA_URL = '/media/'
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'
+
+
