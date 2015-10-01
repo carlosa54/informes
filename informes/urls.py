@@ -26,6 +26,10 @@ urlpatterns = [
         include('informes.informesmen.urls')
     ),
     url(
+        r'^',
+        include('informes.departamentos.urls')
+    ),
+    url(
     	'^', 
     	include('django.contrib.auth.urls')
     ),

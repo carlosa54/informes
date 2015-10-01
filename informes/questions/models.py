@@ -7,7 +7,7 @@ class Answer(BaseModel):
 	number = models.IntegerField(validators= [MinValueValidator(0)])
 
 	def __unicode__(self):
-		return chr(self.number)
+		return str(self.number)
 
 class Question(BaseModel):
 	question_text = models.CharField(max_length=200)

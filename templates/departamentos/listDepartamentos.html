@@ -1,0 +1,5 @@
+<form method="post" action= "{% url 'createinforme' %}" class="form-horizontal"> {% csrf_token %}
+	{% for departamento in departamentos %}
+	<button style="display: block; width: 100%;" type="submit" class="btn btn-material-cyan" name= "departamento" value= {{departamento}}>{{ departamento }}</button>
+	{% endfor %}
+</form>
