@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import dj_database_url
 from configurations import Configuration, values
 
 class Common(Configuration):
@@ -160,6 +159,4 @@ class Production(Staging):
     """
     The in-production settings.
     """
-
-    DATABASES =  dj_database_url.config()
     STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
