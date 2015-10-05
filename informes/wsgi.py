@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 
 import os
 
-ENVIRONMENT = os.getenv('ENVIRONMENT')
+ENVIRONMENT = os.getenv('ENVIRONMENT').title()
 
 if ENVIRONMENT == 'STAGING':
     settings = 'staging'
