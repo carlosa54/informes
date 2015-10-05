@@ -9,9 +9,9 @@ urlpatterns = [
         name="dashboard"
     ),
     url(
-    	r'^createinforme/',
-    	views.CreateInformeView.as_view(),
-    	name="createinforme"
+        r'^createinforme/',
+        views.CreateInformeView.as_view(),
+        name="createinforme"
     ),
     url(
         r'^listinformes/',

@@ -5,7 +5,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Answer(BaseModel):
 	number = models.IntegerField(validators= [MinValueValidator(0)])
-
 	def __unicode__(self):
 		return str(self.number)
 

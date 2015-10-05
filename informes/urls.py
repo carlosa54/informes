@@ -17,23 +17,23 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(
+	url(
     	r'^admin/', 
     	include(admin.site.urls)
     	),
-    url(
+	url(
         r'^',
         include('informes.informesmen.urls')
     ),
-    url(
+	url(
         r'^',
         include('informes.departamentos.urls')
     ),
-    url(
+	url(
     	'^', 
     	include('django.contrib.auth.urls')
     ),
-    url(
+	url(
         r'^',
         include('informes.users.urls')
     ),
