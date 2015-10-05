@@ -15,13 +15,15 @@ class Departamento(BaseModel):
 class DepartamentoQuestion(BaseModel):
 	departamento = models.ForeignKey(Departamento)
 	question = models.ForeignKey(Question)
+	def __unicode__(self):
+		return self.question.question_text + ' - ' + self.departamento.name
 
 
 class DepartamentoPerson(BaseModel):
 	departamento = models.ForeignKey(Departamento)
 	persona = models.ForeignKey(Person)
 	def __unicode__(self):
-		return self.persona.first_name
+		return self.persona.first_name + ' - ' + self.departamento.name
 
 class Answer(BaseModel):
 	number = models.IntegerField(validators= [MinValueValidator(0)])
