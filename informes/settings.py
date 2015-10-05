@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 from configurations import Configuration, values
 
 class Common(Configuration):
@@ -78,9 +79,10 @@ class Common(Configuration):
     # Database
     # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-    DATABASES = values.DatabaseURLValue(
-        'sqlite:///{}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
-    )
+    
+    DATABASES = {
+    'default': dj_database_url.config(default='sqlite:///db.sqlite')
+    }
 
 
     # Internationalization
@@ -159,4 +161,5 @@ class Production(Staging):
     """
     The in-production settings.
     """
+    
     STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
