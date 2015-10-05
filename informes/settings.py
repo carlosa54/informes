@@ -161,5 +161,6 @@ class Production(Staging):
     """
     The in-production settings.
     """
+    DEBUG = False
     
     STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
