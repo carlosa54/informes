@@ -20,13 +20,40 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('modified_at', models.DateTimeField(auto_now=True)),
                 ('name', models.CharField(max_length=200)),
-                ('departamentos', models.ManyToManyField(to='departamentos.Departamento')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ('-modified_at', '-created_at'),
                 'abstract': False,
                 'get_latest_by': 'modified_at',
             },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='InformeDepartamento',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('modified_at', models.DateTimeField(auto_now=True)),
+                ('departamento', models.ForeignKey(to='departamentos.Departamento')),
+                ('informe', models.ForeignKey(to='informesmen.Informe')),
+            ],
+            options={
+                'ordering': ('-modified_at', '-created_at'),
+                'abstract': False,
+                'get_latest_by': 'modified_at',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='informe',
+            name='departamentos',
+            field=models.ManyToManyField(to='departamentos.Departamento', through='informesmen.InformeDepartamento'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='informe',
+            name='user',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+            preserve_default=True,
         ),
     ]

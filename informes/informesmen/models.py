@@ -7,4 +7,8 @@ from ..users.models import User
 class Informe(BaseModel):
 	name = models.CharField(max_length=200)
 	user = models.ForeignKey(User)
-	departamentos = models.ManyToManyField(Departamento)
+	departamentos = models.ManyToManyField(Departamento, through='InformeDepartamento')
+
+class InformeDepartamento(BaseModel):
+	departamento = models.ForeignKey(Departamento)
+	informe = models.ForeignKey(Informe)
