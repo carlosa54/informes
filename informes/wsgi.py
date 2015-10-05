@@ -8,11 +8,28 @@ https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 """
 
 import os
+import dotenv
 
-from django.core.wsgi import get_wsgi_application
+try:
+    dotenv.read_dotenv(
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
+except Exception as e:
+    print(e)
+
+
+ENVIRONMENT = os.getenv('ENVIRONMENT')
+
+if ENVIRONMENT == 'STAGING':
+    settings = 'staging'
+elif ENVIRONMENT == 'PRODUCTION':
+    settings = 'production'
+else:
+    settings = 'development'
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "informes.settings")
+os.environ.setdefault('DJANGO_CONFIGURATION', settings.title())
 
+from configurations.wsgi import get_wsgi_application
 application = get_wsgi_application()
 from whitenoise.django import DjangoWhiteNoise
 application = DjangoWhiteNoise(application)
