@@ -4,4 +4,4 @@ from .models import Informe
 class InformeForm(forms.ModelForm):
 	class Meta:
 		model = Informe
-		fields = ['name', 'departamentos']
+		fields = ['name']

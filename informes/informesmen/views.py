@@ -15,7 +15,7 @@ class CreateInformeView(TemplateView):
 		if not request.user.is_authenticated():
 			return redirect("/login")
 		context = self.get_context_data(**kwargs)
-		form = InformeForm(request.POST)
+		form = InformeForm()
 
 		if request.POST.get("departamento", False):
 			context["departamento"] = request.POST.get("departamento", False)
@@ -31,8 +31,11 @@ class CreateInformeView(TemplateView):
 		if not request.user.is_authenticated():
 			return redirect("/login")
 		context = self.get_context_data(**kwargs)
+		form = InformeForm()
 
-		context = self.retrieve_persons(request.user, context)
+		context["form"] = form
+
+		#context = self.retrieve_persons(request.user, context)
 		return self.render_to_response(context)
 
 
