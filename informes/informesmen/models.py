@@ -1,6 +1,6 @@
 from django.db import models
 from ..utils.models import BaseModel
-from ..departamentos.models import Departamento, DepartamentoQuestion
+from ..departamentos.models import Departamento, Answer
 from ..users.models import User
 from datetime import datetime
 
@@ -10,7 +10,7 @@ class Informe(BaseModel):
 	name = models.CharField(max_length=200)
 	user = models.ForeignKey(User)
 	departamentos = models.ManyToManyField(Departamento, through='InformeDepartamento')
-	questions = models.ManyToManyField(DepartamentoQuestion, through='InformeQuestion')
+	questions = models.ManyToManyField(Answer, through='InformeQuestion')
 	date = models.DateField(default = datetime.now)
 
 	def __unicode__(self):
@@ -22,4 +22,4 @@ class InformeDepartamento(BaseModel):
 
 class InformeQuestion(BaseModel):
 	informe = models.ForeignKey(Informe)
-	question = models.ForeignKey(DepartamentoQuestion)
+	question = models.ForeignKey(Answer)
