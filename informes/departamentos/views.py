@@ -16,6 +16,7 @@ class DepartamentosView(TemplateView):
 		if not request.user.is_authenticated():
 			return redirect("/login")
 		context = self.get_context_data(**kwargs)
+		print request.session['informe_id']
 
 		context = self.retrieve_departamentos(request.user, context)
 		return self.render_to_response(context)

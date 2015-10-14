@@ -15,25 +15,20 @@ class CreateInformeView(TemplateView):
 		if not request.user.is_authenticated():
 			return redirect("/login")
 		context = self.get_context_data(**kwargs)
-		form = InformeForm()
-
-		if request.POST.get("departamento", False):
-			context["departamento"] = request.POST.get("departamento", False)
-			context = self.retrieve_persons(request.user,context)
+		form = InformeForm(request.POST)
 
 		if form.is_valid():
 			new_informe = form.save(commit=False)
 			new_informe.user = request.user
-		context = self.retrieve_persons(request.user,context)
+			new_informe.save()
+			request.session['informe_id'] = new_informe.id
+			return redirect("/departamentos")
 		return self.render_to_response(context)
 
 	def get(self, request, *args, **kwargs):
 		if not request.user.is_authenticated():
 			return redirect("/login")
 		context = self.get_context_data(**kwargs)
-		form = InformeForm()
-
-		context["form"] = form
 
 		#context = self.retrieve_persons(request.user, context)
 		return self.render_to_response(context)
@@ -62,6 +57,31 @@ class ListInformesView(TemplateView):
 
 		context['informes'] = informes
 
+		return self.render_to_response(context)
+
+class InformeDetail(TemplateView):
+	template_name = "dashboard/detailinforme.html"
+
+	def post(self, request, *args, **kwargs):
+		if not request.user.is_authenticated():
+			return redirect("/login")
+		context = self.get_context_data(**kwargs)
+		form = InformeForm(request.POST)
+
+		if form.is_valid():
+			new_informe = form.save(commit=False)
+			new_informe.user = request.user
+			new_informe.save()
+			request.session['informe_id'] = new_informe.id
+			return redirect("/departamentos")
+		return self.render_to_response(context)
+
+	def get(self, request, *args, **kwargs):
+		if not request.user.is_authenticated():
+			return redirect("/login")
+		context = self.get_context_data(**kwargs)
+
+		#context = self.retrieve_persons(request.user, context)
 		return self.render_to_response(context)
 
 

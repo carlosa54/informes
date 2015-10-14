@@ -11,6 +11,9 @@ class Informe(BaseModel):
 	departamentos = models.ManyToManyField(Departamento, through='InformeDepartamento')
 	questions = models.ManyToManyField(DepartamentoQuestion, through='InformeQuestion')
 
+	def __unicode__(self):
+		return self.name + ' : ' + self.user.regional
+
 class InformeDepartamento(BaseModel):
 	departamento = models.ForeignKey(Departamento)
 	informe = models.ForeignKey(Informe)

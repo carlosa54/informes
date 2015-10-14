@@ -18,4 +18,9 @@ urlpatterns = [
         views.ListInformesView.as_view(),
         name="listinformes"
     ),
+    url(
+        r'^(?P<informe_id>[0-9]+)/$', 
+        views.InformeDetail.as_view(), 
+        name='informedetail'
+    ),
 ]
