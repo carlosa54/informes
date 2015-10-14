@@ -2,6 +2,7 @@ from django.db import models
 from ..utils.models import BaseModel
 from ..departamentos.models import Departamento, DepartamentoQuestion
 from ..users.models import User
+from datetime import datetime
 
 
 # Create your models here.
@@ -10,6 +11,7 @@ class Informe(BaseModel):
 	user = models.ForeignKey(User)
 	departamentos = models.ManyToManyField(Departamento, through='InformeDepartamento')
 	questions = models.ManyToManyField(DepartamentoQuestion, through='InformeQuestion')
+	date = models.DateField(default = datetime.now)
 
 	def __unicode__(self):
 		return self.name + ' : ' + self.user.regional
